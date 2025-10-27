@@ -8,7 +8,6 @@ import morganMiddleware from './logs/morganMiddleware';
 // ✅ Importar rutas existentes
 import authRoutes from './routes/auth.routes';
 import adminRoutes from './routes/admin';
-import reportesRoutes from './routes/reportesRoutes';
 import cajeroRoutes from './routes/cajero';
 import productosRoutes from './routes/productos.routes';
 import carritoRoutes from './routes/carrito.routes';
@@ -64,7 +63,6 @@ app.set('view engine', 'ejs');
 // ✅ Registrar rutas
 app.use('/auth', authRoutes);
 app.use('/admin', adminRoutes);
-app.use('/api', reportesRoutes);
 app.use('/api', cajeroRoutes);
 app.use('/api/productos', productosRoutes);
 app.use('/api/carrito', carritoRoutes);
