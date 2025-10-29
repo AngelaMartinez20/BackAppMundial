@@ -29,16 +29,25 @@ if (!process.env.JWT_SECRET) {
 const app = express();
 app.set('trust proxy', 1);
 
-// 📌 Configuración de CORS
+// ✅ Configuración de CORS (compatible con Android)
+const allowedOrigins = [
+  'http://localhost:3000',
+  'http://localhost:5173',
+  'https://frontend-1w8y.vercel.app',
+  undefined // ← permite peticiones con Origin: null (apps Android o Postman)
+];
+
 app.use(cors({
-  origin: [
-    'http://localhost:3000',
-    'http://localhost:5173',
-    'https://frontend-1w8y.vercel.app'
-  ],
-  credentials: true,
-  allowedHeaders: ['Authorization', 'Content-Type'],
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('CORS no permitido para este origen'));
+    }
+  },
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Authorization', 'Content-Type'],
+  credentials: true
 }));
 
 app.use(express.json());
