@@ -11,6 +11,7 @@ import adminRoutes from './routes/admin';
 import cajeroRoutes from './routes/cajero';
 import productosRoutes from './routes/productos.routes';
 import carritoRoutes from './routes/carrito.routes';
+import inventoryRoutes from './routes/inventory.routes'; // <-- ¡AÑADE ESTA LÍNEA!
 
 
 
@@ -75,6 +76,7 @@ app.use('/admin', adminRoutes);
 app.use('/api', cajeroRoutes);
 app.use('/api/productos', productosRoutes);
 app.use('/api/carrito', carritoRoutes);
+app.use('/api/inventory', inventoryRoutes); // <-- ¡AÑADE ESTA LÍNEA!
 
 
 
