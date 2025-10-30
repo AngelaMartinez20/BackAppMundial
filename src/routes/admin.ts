@@ -1,5 +1,11 @@
 import { Router, Request, Response } from 'express';
-import { getUsers, updateUserRole, deleteUser } from '../controllers/admin';
+// 1. IMPORTA LA NUEVA FUNCIÓN AQUÍ
+import { 
+    getUsers, 
+    updateUserRole, 
+    deleteUser,
+    resetUserPassword // <-- Añadido
+} from '../controllers/admin';
 import { authenticateUser, authorizeRoles } from '../middlewares/authenticateUser';
 
 const router = Router();
@@ -20,5 +26,13 @@ router.put('/users/role', authenticateUser, authorizeRoles('admin'), updateUserR
 
 // ✅ Ruta para eliminar un usuario
 router.delete('/users/:id', authenticateUser, authorizeRoles('admin'), deleteUser);
+
+// 2. AÑADE LA NUEVA RUTA AQUÍ
+// ✅ Ruta para reiniciar la contraseña de un usuario
+router.put('/users/password', 
+    authenticateUser, 
+    authorizeRoles('admin'), 
+    resetUserPassword
+);
 
 export default router;
